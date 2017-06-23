@@ -8,5 +8,9 @@
   },
   "repository": "Gopikrishna19/learning-compiler",
   "author": "Gopikrishna Sathyamurthy",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "code": "4.1.0",
+    "mocha": "3.4.2"
+  }
 }
