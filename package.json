@@ -1,0 +1,12 @@
+{
+  "name": "lambda-language",
+  "version": "0.0.0",
+  "description": "learning compiler",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "Gopikrishna19/learning-compiler",
+  "author": "Gopikrishna Sathyamurthy",
+  "license": "MIT"
+}
