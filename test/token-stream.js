@@ -59,4 +59,29 @@ describe('Token Stream', () => {
 
   });
 
+  it('should parse strings', () => {
+
+    expect(createStream('\'single quotes\'').next()).to.equal({
+      type: Symbol.for('STRING'),
+      value: 'single quotes'
+    });
+
+    expect(createStream('"double quotes"').next()).to.equal({
+      type: Symbol.for('STRING'),
+      value: 'double quotes'
+    });
+
+    expect(createStream('`ticks`').next()).to.equal({
+      type: Symbol.for('STRING'),
+      value: 'ticks'
+    });
+
+  });
+
+  it('should fail on incomplete strings', () => {
+
+    expect(() => createStream('"test').next()).to.throw(Error, 'Unexpected end of input: "test (1:5)');
+
+  });
+
 });

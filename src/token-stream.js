@@ -1,4 +1,5 @@
 const {Tokens} = require('./tokens');
+const {Types} = require('./types');
 
 class TokenStream {
 
@@ -42,7 +43,38 @@ class TokenStream {
 
     }
 
+    if (TokenStream.is(char, Tokens.QUOTES)) {
+
+      return TokenStream.readString(input, input.next());
+
+    }
+
     return stream.fail(`Unexpected character: ${char}`);
+
+  }
+
+  static readString(input, quote) {
+
+    let sequence = '';
+
+    while (!input.eof()) {
+
+      const char = input.next();
+
+      if (char === quote) {
+
+        return {
+          type: Types.STRING,
+          value: sequence
+        };
+
+      }
+
+      sequence += char;
+
+    }
+
+    return input.fail(`Unexpected end of input: ${quote}${sequence}`);
 
   }
 

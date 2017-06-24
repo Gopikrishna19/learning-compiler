@@ -12,6 +12,16 @@ class Tokens {
 
   }
 
+  static get QUOTES() {
+
+    return new Set([
+      '\'',
+      '\"',
+      '\`'
+    ]);
+
+  }
+
   static get SPACES() {
 
     return new Set([
