@@ -225,4 +225,20 @@ describe('Token Stream', () => {
 
   });
 
+  describe('when checking for EOF', () => {
+
+    it('should return true if it is end of stream', () => {
+
+      expect(createStream('').EOF).to.be.true();
+
+    });
+
+    it('should return false if it is not the end of stream', () => {
+
+      expect(createStream('a').EOF).to.be.false();
+
+    });
+
+  });
+
 });

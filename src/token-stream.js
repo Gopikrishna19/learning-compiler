@@ -2,6 +2,12 @@ const {readNext} = require('./readers/next');
 
 class TokenStream {
 
+  get EOF() {
+
+    return this.peek() === null;
+
+  }
+
   constructor(input) {
 
     this.$$current = null;
