@@ -179,4 +179,30 @@ describe('Token Stream', () => {
 
   });
 
+  it('should parse operators', () => {
+
+    [
+      '+',
+      '-',
+      '*',
+      '/',
+      '%',
+      '=',
+      '&',
+      '|',
+      '<',
+      '>',
+      '<=',
+      '>=',
+      '==',
+      '!='
+    ].forEach(symbol =>
+      expect(createStream(symbol).next()).equals({
+        type: Symbol.for('OPERATOR'),
+        value: symbol
+      })
+    );
+
+  });
+
 });
