@@ -1,8 +1,18 @@
 class Tokens {
 
-  static get COMMENT () {
+  static get COMMENT() {
 
     return new Set(['#']);
+
+  }
+
+  static get SPACES() {
+
+    return new Set([
+      ' ',
+      '\n',
+      '\t'
+    ]);
 
   }
 

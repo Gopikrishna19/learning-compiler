@@ -59,4 +59,12 @@ describe('Token Stream', () => {
 
   });
 
+  it('should skip white spaces', () => {
+
+    const stream = createStream('  \n \t');
+
+    expect(stream.next()).to.be.null();
+
+  });
+
 });

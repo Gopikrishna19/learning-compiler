@@ -8,9 +8,17 @@ class TokenStream {
 
   }
 
+  static isSpace(char) {
+
+    return TokenStream.is(char, Tokens.SPACES);
+
+  }
+
   static readNext(stream) {
 
     const {input} = stream;
+
+    TokenStream.readWhile(input, TokenStream.isSpace);
 
     if (input.eof()) {
 
