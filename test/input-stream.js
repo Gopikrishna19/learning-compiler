@@ -141,13 +141,13 @@ describe('Input Stream', () => {
 
     it('should return true if it is end of stream', () => {
 
-      expect(new InputStream('').eof()).to.be.true();
+      expect(new InputStream('').EOF).to.be.true();
 
     });
 
     it('should return false if it is not the end of stream', () => {
 
-      expect(new InputStream('a').eof()).to.be.false();
+      expect(new InputStream('a').EOF).to.be.false();
 
     });
 

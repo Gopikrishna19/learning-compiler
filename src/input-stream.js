@@ -1,5 +1,11 @@
 class InputStream {
 
+  get EOF() {
+
+    return this.peek() === '';
+
+  }
+
   constructor(input) {
 
     this.column = 0;
@@ -12,12 +18,6 @@ class InputStream {
   fail(message) {
 
     throw new Error(`${message} (${this.row}:${this.column})`);
-
-  }
-
-  eof() {
-
-    return this.peek() === '';
 
   }
 

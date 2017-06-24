@@ -27,7 +27,7 @@ class TokenStream {
 
     TokenStream.readWhile(input, TokenStream.isSpace);
 
-    if (input.eof()) {
+    if (input.EOF) {
 
       return null;
 
@@ -57,7 +57,7 @@ class TokenStream {
 
     let sequence = '';
 
-    while (!input.eof()) {
+    while (!input.EOF) {
 
       const char = input.next();
 
@@ -82,7 +82,7 @@ class TokenStream {
 
     let sequence = '';
 
-    while (!input.eof() && predicate(input.peek())) {
+    while (!input.EOF && predicate(input.peek())) {
 
       sequence += input.next();
 
