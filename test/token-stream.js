@@ -158,4 +158,25 @@ describe('Token Stream', () => {
 
   });
 
+  it('should parse symbols', () => {
+
+    [
+      '(',
+      ')',
+      '{',
+      '}',
+      '[',
+      ']',
+      ',',
+      ';',
+      '.'
+    ].forEach(symbol =>
+      expect(createStream(symbol).next()).equals({
+        type: Symbol.for('SYMBOL'),
+        value: symbol
+      })
+    );
+
+  });
+
 });
