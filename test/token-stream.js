@@ -37,33 +37,25 @@ describe('Token Stream', () => {
 
   it('should return null if end of stream', () => {
 
-    const stream = createStream('');
-
-    expect(stream.next()).to.be.null();
+    expect(createStream('').next()).to.be.null();
 
   });
 
   it('should fail on unexpected characters', () => {
 
-    const stream = createStream('blah');
-
-    expect(() => stream.next()).to.throw(Error, 'Unexpected character: b (1:0)');
+    expect(() => createStream('blah').next()).to.throw(Error, 'Unexpected character: b (1:0)');
 
   });
 
   it('should skip comments', () => {
 
-    const stream = createStream('# comment');
-
-    expect(stream.next()).to.be.null();
+    expect(createStream('# comment').next()).to.be.null();
 
   });
 
   it('should skip white spaces', () => {
 
-    const stream = createStream('  \n \t');
-
-    expect(stream.next()).to.be.null();
+    expect(createStream('  \n \t').next()).to.be.null();
 
   });
 
