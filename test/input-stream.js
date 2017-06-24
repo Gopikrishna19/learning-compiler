@@ -153,14 +153,4 @@ describe('Input Stream', () => {
 
   });
 
-  describe('when handling failure', () => {
-
-    it('should throw the message with row and column', () => {
-
-      expect(() => new InputStream().fail('message')).to.throw(Error, 'message (1:0)');
-
-    });
-
-  });
-
 });

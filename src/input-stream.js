@@ -15,12 +15,6 @@ class InputStream {
 
   }
 
-  fail(message) {
-
-    throw new Error(`${message} (${this.row}:${this.column})`);
-
-  }
-
   next() {
 
     const char = this.peek();

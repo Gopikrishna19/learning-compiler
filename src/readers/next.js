@@ -1,5 +1,6 @@
 const {COMMENTS, readComments} = require('./comments.js');
 const {QUOTES, readString} = require('./strings.js');
+const {UnexpectedCharError} = require('./errors/unexpected-char.js');
 const {isNumber, readNumber} = require('./numbers.js');
 const {isOneOf} = require('./utils/is.js');
 const {readSpaces} = require('./spaces.js');
@@ -34,7 +35,7 @@ const readNext = stream => {
 
   }
 
-  return stream.fail(`Unexpected character: ${char}`);
+  throw new UnexpectedCharError(char, input);
 
 };
 

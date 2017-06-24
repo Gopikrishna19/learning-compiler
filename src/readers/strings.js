@@ -1,3 +1,5 @@
+const {UnexpectedEOFError} = require('./errors/unexpected-eof');
+
 const ESCAPES = {
   '"': '"',
   '\'': '\'',
@@ -51,7 +53,7 @@ const readString = (input, quote) => {
 
   }
 
-  return input.fail(`Unexpected end of input: ${quote}${sequence}`);
+  throw new UnexpectedEOFError(quote, sequence, input);
 
 };
 
