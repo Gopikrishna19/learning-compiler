@@ -122,45 +122,39 @@ describe('Token Stream', () => {
 
   it('should parse identifiers', () => {
 
-    expect(createStream('abc').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: 'abc'
-    });
+    [
+      'abc',
+      'abc-def',
+      'abcDef',
+      'abc_def',
+      'abc123$',
+      '_abc',
+      '_abc',
+      'AbcDef'
+    ].forEach(identifier =>
+      expect(createStream(identifier).next()).equals({
+        type: Symbol.for('IDENTIFIER'),
+        value: identifier
+      })
+    );
 
-    expect(createStream('abc-def').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: 'abc-def'
-    });
+  });
 
-    expect(createStream('abcDef').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: 'abcDef'
-    });
+  it('should parse keywords', () => {
 
-    expect(createStream('abc_def').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: 'abc_def'
-    });
-
-    expect(createStream('abc123$').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: 'abc123$'
-    });
-
-    expect(createStream('_abc').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: '_abc'
-    });
-
-    expect(createStream('_abc').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: '_abc'
-    });
-
-    expect(createStream('AbcDef').next()).equals({
-      type: Symbol.for('IDENTIFIER'),
-      value: 'AbcDef'
-    });
+    [
+      'if',
+      'then',
+      'else',
+      'lambda',
+      'true',
+      'false'
+    ].forEach(identifier =>
+      expect(createStream(identifier).next()).equals({
+        type: Symbol.for('KEYWORD'),
+        value: identifier
+      })
+    );
 
   });
 
