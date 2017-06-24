@@ -55,18 +55,29 @@ class TokenStream {
 
   static readString(input, quote) {
 
-    let sequence = '';
+    let escaped = false,
+      sequence = '';
 
     while (!input.EOF) {
 
-      const char = input.next();
+      let char = input.next();
 
-      if (char === quote) {
+      if (escaped) {
+
+        char = Tokens.ESCAPES[char] ? Tokens.ESCAPES[char] : char;
+        escaped = false;
+
+      } else if (char === quote) {
 
         return {
           type: Types.STRING,
           value: sequence
         };
+
+      } else if (char === '\\') {
+
+        escaped = true;
+        char = '';
 
       }
 

@@ -78,6 +78,15 @@ describe('Token Stream', () => {
 
   });
 
+  it('should parse escaped strings', () => {
+
+    expect(createStream('"a\\\"\\t\\v\\f\\\``\\\'\'\\n\\r\\eb"').next()).equals({
+      type: Symbol.for('STRING'),
+      value: 'a\"\t\v\f\``\'\'\n\reb'
+    });
+
+  });
+
   it('should fail on incomplete strings', () => {
 
     expect(() => createStream('"test').next()).to.throw(Error, 'Unexpected end of input: "test (1:5)');

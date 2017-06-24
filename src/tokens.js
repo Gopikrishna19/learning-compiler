@@ -6,6 +6,21 @@ class Tokens {
 
   }
 
+  static get ESCAPES() {
+
+    return {
+      '"': '"',
+      '\'': '\'',
+      '`': '`',
+      'f': '\f',
+      'n': '\n',
+      'r': '\r',
+      't': '\t',
+      'v': '\v'
+    };
+
+  }
+
   static get NEWLINES() {
 
     return new Set(['\n']);
