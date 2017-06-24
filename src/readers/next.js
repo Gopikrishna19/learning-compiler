@@ -1,8 +1,7 @@
-const {COMMENTS, readComments} = require('./comments.js');
-const {QUOTES, readString} = require('./strings.js');
 const {UnexpectedCharError} = require('./errors/unexpected-char.js');
+const {isComment, readComments} = require('./comments.js');
 const {isNumber, readNumber} = require('./numbers.js');
-const {isOneOf} = require('./utils/is.js');
+const {isString, readString} = require('./strings.js');
 const {readSpaces} = require('./spaces.js');
 
 const readNext = stream => {
@@ -19,13 +18,13 @@ const readNext = stream => {
 
   const char = input.peek();
 
-  if (isOneOf(char, COMMENTS)) {
+  if (isComment(char)) {
 
     readComments(input);
 
     return readNext(stream);
 
-  } else if (isOneOf(char, QUOTES)) {
+  } else if (isString(char)) {
 
     return readString(input, input.next());
 

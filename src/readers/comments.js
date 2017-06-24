@@ -4,6 +4,7 @@ const {readWhile} = require('./utils/while');
 
 const COMMENTS = new Set(['#']);
 
+const isComment = char => isOneOf(char, COMMENTS);
 const isNotNewline = char => !isOneOf(char, NEWLINES);
 
 const readComments = input => {
@@ -15,6 +16,6 @@ const readComments = input => {
 };
 
 module.exports = {
-  COMMENTS,
+  isComment,
   readComments
 };

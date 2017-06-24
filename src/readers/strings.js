@@ -1,4 +1,5 @@
 const {UnexpectedEOFError} = require('./errors/unexpected-eof');
+const {isOneOf} = require('./utils/is');
 
 const ESCAPES = {
   '"': '"',
@@ -18,6 +19,8 @@ const QUOTES = new Set([
 ]);
 
 const STRING = Symbol.for('STRING');
+
+const isString = char => isOneOf(char, QUOTES);
 
 const readString = (input, quote) => {
 
@@ -58,6 +61,6 @@ const readString = (input, quote) => {
 };
 
 module.exports = {
-  QUOTES,
+  isString,
   readString
 };
