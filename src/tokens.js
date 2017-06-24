@@ -1,12 +1,12 @@
 class Tokens {
 
-  static get COMMENT() {
+  static get COMMENTS() {
 
     return new Set(['#']);
 
   }
 
-  static get NEWLINE() {
+  static get NEWLINES() {
 
     return new Set(['\n']);
 
@@ -27,7 +27,7 @@ class Tokens {
     return new Set([
       ' ',
       '\t',
-      ...Tokens.NEWLINE
+      ...Tokens.NEWLINES
     ]);
 
   }

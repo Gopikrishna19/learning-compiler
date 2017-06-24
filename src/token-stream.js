@@ -3,7 +3,7 @@ const {Types} = require('./types');
 
 class TokenStream {
 
-  static is(value, set) {
+  static isOneOf(value, set) {
 
     return set.has(value);
 
@@ -11,13 +11,13 @@ class TokenStream {
 
   static isNotNewline(char) {
 
-    return !TokenStream.is(char, Tokens.NEWLINE);
+    return !TokenStream.isOneOf(char, Tokens.NEWLINES);
 
   }
 
   static isSpace(char) {
 
-    return TokenStream.is(char, Tokens.SPACES);
+    return TokenStream.isOneOf(char, Tokens.SPACES);
 
   }
 
@@ -35,7 +35,7 @@ class TokenStream {
 
     const char = input.peek();
 
-    if (TokenStream.is(char, Tokens.COMMENT)) {
+    if (TokenStream.isOneOf(char, Tokens.COMMENTS)) {
 
       TokenStream.skipComment(input);
 
@@ -43,7 +43,7 @@ class TokenStream {
 
     }
 
-    if (TokenStream.is(char, Tokens.QUOTES)) {
+    if (TokenStream.isOneOf(char, Tokens.QUOTES)) {
 
       return TokenStream.readString(input, input.next());
 
