@@ -8,9 +8,15 @@ describe('Token Stream', () => {
 
   describe('initialization', () => {
 
-    let stream;
+    let input,
+      stream;
 
-    beforeEach(() => stream = new TokenStream());
+    beforeEach(() => {
+
+      input = new InputStream('');
+      stream = new TokenStream(input);
+
+    });
 
     it('should be initialized and used as an object', () => {
 
@@ -20,7 +26,10 @@ describe('Token Stream', () => {
 
     it('should have initial configurations', () => {
 
-      expect(stream).to.include({current: null});
+      expect(stream).to.include({
+        current: null,
+        input
+      });
 
     });
 
@@ -31,6 +40,14 @@ describe('Token Stream', () => {
     const stream = createStream('');
 
     expect(stream.next()).to.be.null();
+
+  });
+
+  it('should fail on unexpected characters', () => {
+
+    const stream = createStream('blah');
+
+    expect(() => stream.next()).to.throw(Error, 'Unexpected character: b (1:0)');
 
   });
 

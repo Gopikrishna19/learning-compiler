@@ -2,19 +2,24 @@ class TokenStream {
 
   static readNext(stream) {
 
-    if (stream.input.eof()) {
+    const {input} = stream;
+
+    if (input.eof()) {
 
       return null;
 
     }
 
-    return null;
+    const char = input.peek();
+
+    return stream.fail(`Unexpected character: ${char}`);
 
   }
 
   constructor(input) {
 
     this.current = null;
+    this.fail = input.fail.bind(input);
     this.input = input;
 
   }
