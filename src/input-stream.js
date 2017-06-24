@@ -9,6 +9,12 @@ class InputStream {
 
   }
 
+  fail(message) {
+
+    throw new Error(`${message} (${this.row}:${this.column})`);
+
+  }
+
   eof() {
 
     return this.peek() === '';
