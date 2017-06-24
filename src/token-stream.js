@@ -8,6 +8,12 @@ class TokenStream {
 
   }
 
+  static isNotNewline(char) {
+
+    return !TokenStream.is(char, Tokens.NEWLINE);
+
+  }
+
   static isSpace(char) {
 
     return TokenStream.is(char, Tokens.SPACES);
@@ -56,9 +62,7 @@ class TokenStream {
 
   static skipComment(input) {
 
-    const tillEndOfLine = char => char !== '\n';
-
-    TokenStream.readWhile(input, tillEndOfLine);
+    TokenStream.readWhile(input, TokenStream.isNotNewline);
 
     input.next();
 

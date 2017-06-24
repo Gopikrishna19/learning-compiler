@@ -6,12 +6,18 @@ class Tokens {
 
   }
 
+  static get NEWLINE() {
+
+    return new Set(['\n']);
+
+  }
+
   static get SPACES() {
 
     return new Set([
       ' ',
-      '\n',
-      '\t'
+      '\t',
+      ...Tokens.NEWLINE
     ]);
 
   }
