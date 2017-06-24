@@ -1,4 +1,4 @@
-const {readNext} = require('./readers/next');
+const {readNext} = require('./tokenizers/next');
 
 class TokenStream {
 
