@@ -7,6 +7,10 @@
   "rules": {
     "camelcase": 2,
     "consistent-return": 2,
+    "complexity": [
+      2,
+      3
+    ],
     "arrow-body-style": [
       2,
       "as-needed"
