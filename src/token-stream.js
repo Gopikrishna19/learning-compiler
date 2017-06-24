@@ -69,7 +69,7 @@ class TokenStream {
 
       const char = input.next();
 
-      if (TokenStream.isNumber(char)) {
+      if (TokenStream.isNumber(char) || TokenStream.isOneOf(char, Tokens.DECIMALS)) {
 
         sequence += char;
 

@@ -6,6 +6,12 @@ class Tokens {
 
   }
 
+  static get DECIMALS() {
+
+    return new Set(['.']);
+
+  }
+
   static get ESCAPES() {
 
     return {

@@ -102,4 +102,22 @@ describe('Token Stream', () => {
 
   });
 
+  it('should parse floating number', () => {
+
+    expect(createStream('123.456').next()).equals({
+      type: Symbol.for('NUMBER'),
+      value: 123.456
+    });
+
+  });
+
+  it('should return NaN for invalid numbers', () => {
+
+    expect(createStream('123.456.768').next()).equals({
+      type: Symbol.for('NUMBER'),
+      value: NaN
+    });
+
+  });
+
 });
