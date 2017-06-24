@@ -1,7 +1,10 @@
+const {InputStream} = require('../src/input-stream.js');
 const {TokenStream} = require('../src/token-stream');
 const {expect} = require('code');
 
 describe('Token Stream', () => {
+
+  const createStream = input => new TokenStream(new InputStream(input));
 
   describe('initialization', () => {
 
@@ -20,6 +23,14 @@ describe('Token Stream', () => {
       expect(stream).to.include({current: null});
 
     });
+
+  });
+
+  it('should return null if end of stream', () => {
+
+    const stream = createStream('');
+
+    expect(stream.next()).to.be.null();
 
   });
 
