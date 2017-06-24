@@ -1,7 +1,7 @@
 const {COMMENTS, readComments} = require('./comments.js');
 const {QUOTES, readString} = require('./strings.js');
 const {isNumber, readNumber} = require('./numbers.js');
-const {isOneOf} = require('./is.js');
+const {isOneOf} = require('./utils/is.js');
 const {readSpaces} = require('./spaces.js');
 
 const readNext = stream => {

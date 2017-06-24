@@ -1,6 +1,6 @@
 const {NEWLINES} = require('./spaces.js');
-const {isOneOf} = require('./is.js');
-const {readWhile} = require('./while');
+const {isOneOf} = require('./utils/is.js');
+const {readWhile} = require('./utils/while');
 
 const COMMENTS = new Set(['#']);
 

@@ -1,4 +1,4 @@
-const {isOneOf} = require('./is.js');
+const {isOneOf} = require('./utils/is.js');
 
 const DECIMALS = new Set(['.']);
 const NUMBER = Symbol.for('NUMBER');
