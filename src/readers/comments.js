@@ -7,7 +7,7 @@ const COMMENTS = new Set(['#']);
 const isComment = char => isOneOf(char, COMMENTS);
 const isNotNewline = char => !isOneOf(char, NEWLINES);
 
-const readComments = input => {
+const readComment = input => {
 
   readWhile(input, isNotNewline);
 
@@ -17,5 +17,5 @@ const readComments = input => {
 
 module.exports = {
   isComment,
-  readComments
+  readComment
 };
