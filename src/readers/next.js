@@ -22,13 +22,11 @@ const readNext = stream => {
 
   if (isComment(char)) {
 
-    readComment(input);
-
-    return readNext(stream);
+    return readComment(input);
 
   } else if (isString(char)) {
 
-    return readString(input, input.next());
+    return readString(input);
 
   } else if (isNumber(char)) {
 

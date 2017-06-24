@@ -11,7 +11,7 @@ const readComment = input => {
 
   readWhile(input, isNotNewline);
 
-  input.next();
+  return null;
 
 };
 

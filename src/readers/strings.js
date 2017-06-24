@@ -22,8 +22,9 @@ const STRING = Symbol.for('STRING');
 
 const isString = char => isOneOf(char, QUOTES);
 
-const readString = (input, quote) => {
+const readString = input => {
 
+  const quote = input.next();
   let escaped = false,
     sequence = '';
 
