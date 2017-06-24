@@ -1,4 +1,4 @@
-const {isOneOf} = require('./utils/is.js');
+const {isOneOf} = require('./utils/is');
 const {readWhile} = require('./utils/while');
 
 const NEWLINES = new Set([

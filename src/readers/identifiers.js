@@ -1,4 +1,4 @@
-const {readWhile} = require('./utils/while.js');
+const {readWhile} = require('./utils/while');
 
 const KEYWORDS = new Set([
   'if',

@@ -1,4 +1,4 @@
-const {isOneOf} = require('./utils/is.js');
+const {isOneOf} = require('./utils/is');
 
 const SYMBOLS = new Set([
   '(',

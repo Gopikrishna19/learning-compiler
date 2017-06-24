@@ -1,4 +1,4 @@
-const {InputStream} = require('../src/input-stream.js');
+const {InputStream} = require('../src/input-stream');
 const {TokenStream} = require('../src/token-stream');
 const {expect} = require('code');
 

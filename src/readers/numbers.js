@@ -1,5 +1,5 @@
-const {isOneOf} = require('./utils/is.js');
-const {readWhile} = require('./utils/while.js');
+const {isOneOf} = require('./utils/is');
+const {readWhile} = require('./utils/while');
 
 const DECIMALS = new Set(['.']);
 const NUMBER = Symbol.for('NUMBER');

@@ -1,4 +1,4 @@
-const {InputError} = require('./input.js');
+const {InputError} = require('./input');
 
 class UnexpectedEOFError extends InputError {
 
