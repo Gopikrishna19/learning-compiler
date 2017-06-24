@@ -1,4 +1,12 @@
+const {Tokens} = require('./tokens');
+
 class TokenStream {
+
+  static is(value, set) {
+
+    return set.has(value);
+
+  }
 
   static readNext(stream) {
 
@@ -12,7 +20,7 @@ class TokenStream {
 
     const char = input.peek();
 
-    if (char === '#') {
+    if (TokenStream.is(char, Tokens.COMMENT)) {
 
       TokenStream.skipComment(input);
 
