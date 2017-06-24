@@ -12,7 +12,39 @@ class TokenStream {
 
     const char = input.peek();
 
+    if (char === '#') {
+
+      TokenStream.skipComment(input);
+
+      return TokenStream.readNext(stream);
+
+    }
+
     return stream.fail(`Unexpected character: ${char}`);
+
+  }
+
+  static readWhile(input, predicate) {
+
+    let sequence = '';
+
+    while (!input.eof() && predicate(input.peek())) {
+
+      sequence += input.next();
+
+    }
+
+    return sequence;
+
+  }
+
+  static skipComment(input) {
+
+    const tillEndOfLine = char => char !== '\n';
+
+    TokenStream.readWhile(input, tillEndOfLine);
+
+    input.next();
 
   }
 

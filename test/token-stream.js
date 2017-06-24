@@ -51,4 +51,12 @@ describe('Token Stream', () => {
 
   });
 
+  it('should skip comments', () => {
+
+    const stream = createStream('# comment');
+
+    expect(stream.next()).to.be.null();
+
+  });
+
 });
