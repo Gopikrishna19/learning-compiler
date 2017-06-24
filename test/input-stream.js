@@ -11,13 +11,13 @@ describe('Input Stream', () => {
 
     it('should be initialized and used as an object', () => {
 
-      expect(stream).object();
+      expect(stream).to.be.object();
 
     });
 
     it('should have initial configurations', () => {
 
-      expect(stream).includes({
+      expect(stream).to.include({
         column: 0,
         position: 0,
         row: 1
@@ -102,6 +102,36 @@ describe('Input Stream', () => {
         expect(nextChar).to.equal('a');
 
       });
+
+    });
+
+  });
+
+  describe('when peeking at the next character', () => {
+
+    let nextChar,
+      stream;
+
+    beforeEach(() => {
+
+      stream = new InputStream('a');
+      nextChar = stream.peek();
+
+    });
+
+    it('should not update metrics', () => {
+
+      expect(stream).to.include({
+        column: 0,
+        position: 0,
+        row: 1
+      });
+
+    });
+
+    it('should return the next character', () => {
+
+      expect(nextChar).to.equal('a');
 
     });
 

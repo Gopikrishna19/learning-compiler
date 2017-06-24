@@ -11,7 +11,7 @@ class InputStream {
 
   next() {
 
-    const char = this.input.charAt(this.position);
+    const char = this.peek();
 
     if (char === '\n') {
 
@@ -27,6 +27,12 @@ class InputStream {
     this.position += 1;
 
     return char;
+
+  }
+
+  peek() {
+
+    return this.input.charAt(this.position);
 
   }
 
