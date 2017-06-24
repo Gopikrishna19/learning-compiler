@@ -9,6 +9,12 @@ class InputStream {
 
   }
 
+  eof() {
+
+    return this.peek() === '';
+
+  }
+
   next() {
 
     const char = this.peek();
