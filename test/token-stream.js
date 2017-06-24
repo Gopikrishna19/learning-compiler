@@ -93,4 +93,13 @@ describe('Token Stream', () => {
 
   });
 
+  it('should parse integers', () => {
+
+    expect(createStream('123').next()).equals({
+      type: Symbol.for('NUMBER'),
+      value: 123
+    });
+
+  });
+
 });

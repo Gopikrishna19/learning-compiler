@@ -15,6 +15,12 @@ class TokenStream {
 
   }
 
+  static isNumber(char) {
+
+    return char >= '0' && char <= '9';
+
+  }
+
   static isSpace(char) {
 
     return TokenStream.isOneOf(char, Tokens.SPACES);
@@ -41,15 +47,40 @@ class TokenStream {
 
       return TokenStream.readNext(stream);
 
-    }
-
-    if (TokenStream.isOneOf(char, Tokens.QUOTES)) {
+    } else if (TokenStream.isOneOf(char, Tokens.QUOTES)) {
 
       return TokenStream.readString(input, input.next());
+
+    } else if (TokenStream.isNumber(char)) {
+
+      return TokenStream.readNumber(input);
 
     }
 
     return stream.fail(`Unexpected character: ${char}`);
+
+  }
+
+  static readNumber(input) {
+
+    let sequence = '';
+
+    while (!input.EOF) {
+
+      const char = input.next();
+
+      if (TokenStream.isNumber(char)) {
+
+        sequence += char;
+
+      }
+
+    }
+
+    return {
+      type: Types.NUMBER,
+      value: Number(sequence)
+    };
 
   }
 
