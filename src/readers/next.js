@@ -6,6 +6,44 @@ const {isString, readString} = require('./strings.js');
 const {isSymbol, readSymbol} = require('./symbols.js');
 const {readSpaces} = require('./spaces.js');
 
+const UNDEFINED = Symbol.for('UNDEFINED');
+
+const readers = [
+  {
+    check: isComment,
+    read: readComment
+  },
+  {
+    check: isString,
+    read: readString
+  },
+  {
+    check: isNumber,
+    read: readNumber
+  },
+  {
+    check: isIdentifier,
+    read: readIdentifier
+  },
+  {
+    check: isSymbol,
+    read: readSymbol
+  }
+];
+
+const getNextToken = (char, input) =>
+  readers.reduce((token, reader) => {
+
+    if (token === UNDEFINED && reader.check(char)) {
+
+      return reader.read(input);
+
+    }
+
+    return token;
+
+  }, UNDEFINED);
+
 const readNext = stream => {
 
   const {input} = stream;
@@ -19,26 +57,11 @@ const readNext = stream => {
   }
 
   const char = input.peek();
+  const next = getNextToken(char, input);
 
-  if (isComment(char)) {
+  if (next !== UNDEFINED) {
 
-    return readComment(input);
-
-  } else if (isString(char)) {
-
-    return readString(input);
-
-  } else if (isNumber(char)) {
-
-    return readNumber(input);
-
-  } else if (isIdentifier(char)) {
-
-    return readIdentifier(input);
-
-  } else if (isSymbol(char)) {
-
-    return readSymbol(input);
+    return next;
 
   }
 
