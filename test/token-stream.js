@@ -43,7 +43,7 @@ describe('Token Stream', () => {
 
   it('should fail on unexpected characters', () => {
 
-    expect(() => createStream('blah').next()).to.throw(Error, 'Unexpected character: b (1:0)');
+    expect(() => createStream('^&').next()).to.throw(Error, 'Unexpected character: ^ (1:0)');
 
   });
 
@@ -116,6 +116,50 @@ describe('Token Stream', () => {
     expect(createStream('123.456.768').next()).equals({
       type: Symbol.for('NUMBER'),
       value: NaN
+    });
+
+  });
+
+  it('should parse identifiers', () => {
+
+    expect(createStream('abc').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: 'abc'
+    });
+
+    expect(createStream('abc-def').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: 'abc-def'
+    });
+
+    expect(createStream('abcDef').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: 'abcDef'
+    });
+
+    expect(createStream('abc_def').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: 'abc_def'
+    });
+
+    expect(createStream('abc123$').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: 'abc123$'
+    });
+
+    expect(createStream('_abc').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: '_abc'
+    });
+
+    expect(createStream('_abc').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: '_abc'
+    });
+
+    expect(createStream('AbcDef').next()).equals({
+      type: Symbol.for('IDENTIFIER'),
+      value: 'AbcDef'
     });
 
   });

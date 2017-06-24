@@ -1,5 +1,6 @@
 const {UnexpectedCharError} = require('./errors/unexpected-char.js');
 const {isComment, readComments} = require('./comments.js');
+const {isIdentifier, readIdentifier} = require('./identifiers.js');
 const {isNumber, readNumber} = require('./numbers.js');
 const {isString, readString} = require('./strings.js');
 const {readSpaces} = require('./spaces.js');
@@ -31,6 +32,10 @@ const readNext = stream => {
   } else if (isNumber(char)) {
 
     return readNumber(input);
+
+  } else if (isIdentifier(char)) {
+
+    return readIdentifier(input);
 
   }
 
