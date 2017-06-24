@@ -1,5 +1,5 @@
-const {expect} = require('code');
 const {InputStream} = require('../src/input-stream');
+const {expect} = require('code');
 
 describe('Input Stream', () => {
 
