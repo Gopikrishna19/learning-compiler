@@ -8,7 +8,7 @@ const readProgram = input => {
 
   while (!input.EOF) {
 
-    readUnit(input);
+    program.push(readUnit(input));
 
   }
 

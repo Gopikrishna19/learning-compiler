@@ -13,6 +13,7 @@ const readNumber = input => ({
 });
 
 module.exports = {
+  NUMBER,
   isNumber,
   readNumber
 };

@@ -5,6 +5,7 @@ const {expect} = require('code');
 
 describe('Parse Stream', () => {
 
+  const PROGRAM = Symbol.for('PROGRAM');
   const createStream = input => new ParseStream(new TokenStream(new InputStream(input)));
 
   describe('initialization', () => {
@@ -41,7 +42,7 @@ describe('Parse Stream', () => {
 
       expect(createStream('').parse()).to.equal({
         program: [],
-        type: Symbol.for('PROGRAM')
+        type: PROGRAM
       });
 
     });
@@ -49,6 +50,18 @@ describe('Parse Stream', () => {
     it('should fail on unexpected token', () => {
 
       expect(() => createStream('=').parse()).to.throw(Error, 'Unexpected token: {"value":"="} (1:1)');
+
+    });
+
+    it('should parse integers', () => {
+
+      expect(createStream('123').parse()).to.equal({
+        program: [{
+          type: Symbol.for('NUMBER'),
+          value: 123
+        }],
+        type: PROGRAM
+      });
 
     });
 
