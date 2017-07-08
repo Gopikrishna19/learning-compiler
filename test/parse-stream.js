@@ -265,6 +265,36 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse unary expressions', () => {
+
+      expect(createStream('-a & !b').parse()).to.equal({
+        program: [
+          {
+            left: {
+              operator: '-',
+              right: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'a'
+              },
+              type: Symbol.for('UNARY')
+            },
+            operator: '&',
+            right: {
+              operator: '!',
+              right: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'b'
+              },
+              type: Symbol.for('UNARY')
+            },
+            type: Symbol.for('BINARY')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });

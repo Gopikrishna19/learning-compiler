@@ -24,10 +24,12 @@ const MULTIPLICATIVES = new Set([
   '%'
 ]);
 
+const NEGATION = new Set(['!']);
+
 const LOGICAL = new Set([
   '&',
   '|',
-  '!'
+  ...NEGATION
 ]);
 
 const OPERATORS = new Set([
@@ -65,6 +67,7 @@ module.exports = {
   COMPARISION,
   LOGICAL,
   MULTIPLICATIVES,
+  NEGATION,
   isOperator,
   readOperator
 };
