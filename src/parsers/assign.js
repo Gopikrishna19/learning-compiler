@@ -11,7 +11,7 @@ const readAssign = tokens => {
 
     return {
       left,
-      right: readUnit(tokens),
+      right: readAssign(tokens),
       type: ASSIGN
     };
 
