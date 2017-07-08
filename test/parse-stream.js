@@ -56,10 +56,12 @@ describe('Parse Stream', () => {
     it('should parse integers', () => {
 
       expect(createStream('123').parse()).to.equal({
-        program: [{
-          type: Symbol.for('NUMBER'),
-          value: 123
-        }],
+        program: [
+          {
+            type: Symbol.for('NUMBER'),
+            value: 123
+          }
+        ],
         type: PROGRAM
       });
 
@@ -68,10 +70,12 @@ describe('Parse Stream', () => {
     it('should parse floating numbers', () => {
 
       expect(createStream('123.12').parse()).to.equal({
-        program: [{
-          type: Symbol.for('NUMBER'),
-          value: 123.12
-        }],
+        program: [
+          {
+            type: Symbol.for('NUMBER'),
+            value: 123.12
+          }
+        ],
         type: PROGRAM
       });
 
@@ -80,10 +84,12 @@ describe('Parse Stream', () => {
     it('should parse strings', () => {
 
       expect(createStream('"test"').parse()).to.equal({
-        program: [{
-          type: Symbol.for('STRING'),
-          value: 'test'
-        }],
+        program: [
+          {
+            type: Symbol.for('STRING'),
+            value: 'test'
+          }
+        ],
         type: PROGRAM
       });
 
@@ -92,10 +98,36 @@ describe('Parse Stream', () => {
     it('should parse identifiers', () => {
 
       expect(createStream('a').parse()).to.equal({
-        program: [{
-          type: Symbol.for('IDENTIFIER'),
-          value: 'a'
-        }],
+        program: [
+          {
+            type: Symbol.for('IDENTIFIER'),
+            value: 'a'
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
+    it('should parse booleans', () => {
+
+      expect(createStream('true').parse()).to.equal({
+        program: [
+          {
+            type: Symbol.for('BOOLEAN'),
+            value: true
+          }
+        ],
+        type: PROGRAM
+      });
+
+      expect(createStream('false').parse()).to.equal({
+        program: [
+          {
+            type: Symbol.for('BOOLEAN'),
+            value: false
+          }
+        ],
         type: PROGRAM
       });
 
