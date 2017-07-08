@@ -5,6 +5,8 @@ const {expect} = require('code');
 
 describe('Parse Stream', () => {
 
+  const createStream = input => new ParseStream(new TokenStream(new InputStream(input)));
+
   describe('initialization', () => {
 
     let input,
@@ -27,6 +29,19 @@ describe('Parse Stream', () => {
 
       expect(stream).to.include({
         input
+      });
+
+    });
+
+  });
+
+  describe('when parsing', () => {
+
+    it('should return empty program if end of stream', () => {
+
+      expect(createStream('').parse()).to.equal({
+        program: [],
+        type: Symbol.for('PROGRAM')
       });
 
     });

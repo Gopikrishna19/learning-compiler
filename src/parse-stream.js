@@ -1,3 +1,5 @@
+const {readProgram} = require('./parsers/program.js');
+
 class ParseStream {
 
   constructor(input) {
@@ -7,6 +9,8 @@ class ParseStream {
   }
 
   parse() {
+
+    return readProgram(this.input);
 
   }
 
