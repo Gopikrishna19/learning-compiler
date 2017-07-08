@@ -27,6 +27,8 @@ const readIdentifier = input => {
 };
 
 module.exports = {
+  IDENTIFIER,
+  KEYWORD,
   isIdentifier,
   readIdentifier
 };

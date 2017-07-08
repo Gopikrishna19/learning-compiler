@@ -89,6 +89,18 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse identifiers', () => {
+
+      expect(createStream('a').parse()).to.equal({
+        program: [{
+          type: Symbol.for('IDENTIFIER'),
+          value: 'a'
+        }],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });
