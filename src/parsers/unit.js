@@ -4,21 +4,21 @@ const {NUMBER} = require('../tokenizers/numbers');
 const {STRING} = require('../tokenizers/strings');
 const {UnexpectedTokenError} = require('./errors/unexpected-token.js');
 
-const readUnit = input => {
+const readUnit = tokens => {
 
-  const token = input.peek();
+  const token = tokens.peek();
 
   if (isBoolean(token)) {
 
-    return parseBoolean(input.next());
+    return parseBoolean(tokens.next());
 
   } else if (token.type === NUMBER || token.type === STRING || token.type === IDENTIFIER) {
 
-    return input.next();
+    return tokens.next();
 
   }
 
-  throw new UnexpectedTokenError(token, input);
+  throw new UnexpectedTokenError(token, tokens);
 
 };
 

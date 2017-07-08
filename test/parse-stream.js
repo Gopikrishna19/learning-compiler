@@ -10,13 +10,13 @@ describe('Parse Stream', () => {
 
   describe('initialization', () => {
 
-    let input,
+    let tokens,
       stream;
 
     beforeEach(() => {
 
-      input = new TokenStream(new InputStream(''));
-      stream = new ParseStream(input);
+      tokens = new TokenStream(new InputStream(''));
+      stream = new ParseStream(tokens);
 
     });
 
@@ -29,7 +29,7 @@ describe('Parse Stream', () => {
     it('should have initial configurations', () => {
 
       expect(stream).to.include({
-        input
+        tokens
       });
 
     });

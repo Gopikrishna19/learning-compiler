@@ -2,15 +2,15 @@ const {readProgram} = require('./parsers/program.js');
 
 class ParseStream {
 
-  constructor(input) {
+  constructor(tokens) {
 
-    this.input = input;
+    this.tokens = tokens;
 
   }
 
   parse() {
 
-    return readProgram(this.input);
+    return readProgram(this.tokens);
 
   }
 

@@ -6,10 +6,10 @@ class InputStream {
 
   }
 
-  constructor(input) {
+  constructor(expression) {
 
     this.column = 0;
-    this.input = input;
+    this.expression = expression;
     this.position = 0;
     this.row = 1;
 
@@ -38,7 +38,7 @@ class InputStream {
 
   peek() {
 
-    return this.input.charAt(this.position);
+    return this.expression.charAt(this.position);
 
   }
 

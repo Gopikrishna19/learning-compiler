@@ -2,13 +2,13 @@ const {readUnit} = require('./unit');
 
 const PROGRAM = Symbol.for('PROGRAM');
 
-const readProgram = input => {
+const readProgram = tokens => {
 
   const program = [];
 
-  while (!input.EOF) {
+  while (!tokens.EOF) {
 
-    program.push(readUnit(input));
+    program.push(readUnit(tokens));
 
   }
 
