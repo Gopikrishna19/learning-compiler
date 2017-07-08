@@ -62,6 +62,7 @@ const readString = input => {
 };
 
 module.exports = {
+  STRING,
   isString,
   readString
 };

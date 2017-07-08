@@ -77,6 +77,18 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse strings', () => {
+
+      expect(createStream('"test"').parse()).to.equal({
+        program: [{
+          type: Symbol.for('STRING'),
+          value: 'test'
+        }],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });
