@@ -13,17 +13,19 @@ const OPERATORS = new Set([
 
 const readBinary = tokens => {
 
-  const left = readUnit(tokens);
-  const operator = expect(tokens, OPERATORS);
+  let left = readUnit(tokens),
+    operator = expect(tokens, OPERATORS);
 
-  if (operator) {
+  while (operator) {
 
-    return {
+    left = {
       left,
       operator: operator.value,
       right: readUnit(tokens),
       type: BINARY
     };
+
+    operator = expect(tokens, OPERATORS);
 
   }
 

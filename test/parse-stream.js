@@ -183,6 +183,43 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse complex binary expressions', () => {
+
+      expect(createStream('a = 1 + 2 - 3').parse()).to.equal({
+        program: [
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'a'
+            },
+            right: {
+              left: {
+                left: {
+                  type: Symbol.for('NUMBER'),
+                  value: 1
+                },
+                operator: '+',
+                right: {
+                  type: Symbol.for('NUMBER'),
+                  value: 2
+                },
+                type: Symbol.for('BINARY')
+              },
+              operator: '-',
+              right: {
+                type: Symbol.for('NUMBER'),
+                value: 3
+              },
+              type: Symbol.for('BINARY')
+            },
+            type: Symbol.for('ASSIGN')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });
