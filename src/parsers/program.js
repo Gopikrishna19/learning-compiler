@@ -1,3 +1,5 @@
+const {readUnit} = require('./unit');
+
 const PROGRAM = Symbol.for('PROGRAM');
 
 const readProgram = input => {
@@ -5,6 +7,8 @@ const readProgram = input => {
   const program = [];
 
   while (!input.EOF) {
+
+    readUnit(input);
 
   }
 

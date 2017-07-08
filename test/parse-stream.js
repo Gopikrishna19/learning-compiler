@@ -46,6 +46,12 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should fail on unexpected token', () => {
+
+      expect(() => createStream('=').parse()).to.throw(Error, 'Unexpected token: {"value":"="} (1:1)');
+
+    });
+
   });
 
 });
