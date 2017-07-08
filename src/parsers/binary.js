@@ -4,16 +4,9 @@ const {readUnit} = require('./unit.js');
 
 const BINARY = Symbol.for('BINARY');
 
-const OPERATORS = new Set([
-  ...operators.MULTIPLICATIVES,
-  ...operators.ADDITIVES,
-  ...operators.COMPARISION,
-  ...operators.LOGICAL
-]);
+const readNextPrecedent = (tokens, OPERATORS, readNext) => {
 
-const readBinary = tokens => {
-
-  let left = readUnit(tokens),
+  let left = readNext(),
     operator = expect(tokens, OPERATORS);
 
   while (operator) {
@@ -21,7 +14,7 @@ const readBinary = tokens => {
     left = {
       left,
       operator: operator.value,
-      right: readUnit(tokens),
+      right: readNext(),
       type: BINARY
     };
 
@@ -30,6 +23,17 @@ const readBinary = tokens => {
   }
 
   return left;
+
+};
+
+const readBinary = tokens => {
+
+  const multiplicatives = () => readNextPrecedent(tokens, operators.MULTIPLICATIVES, () => readUnit(tokens));
+  const additives = () => readNextPrecedent(tokens, operators.ADDITIVES, multiplicatives);
+  const comparision = () => readNextPrecedent(tokens, operators.COMPARISION, additives);
+  const logical = () => readNextPrecedent(tokens, operators.LOGICAL, comparision);
+
+  return logical();
 
 };
 

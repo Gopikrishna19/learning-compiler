@@ -220,6 +220,51 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse binary expressions with precedence', () => {
+
+      expect(createStream('a = 1 % 2 - 3 / 4').parse()).to.equal({
+        program: [
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'a'
+            },
+            right: {
+              left: {
+                left: {
+                  type: Symbol.for('NUMBER'),
+                  value: 1
+                },
+                operator: '%',
+                right: {
+                  type: Symbol.for('NUMBER'),
+                  value: 2
+                },
+                type: Symbol.for('BINARY')
+              },
+              operator: '-',
+              right: {
+                left: {
+                  type: Symbol.for('NUMBER'),
+                  value: 3
+                },
+                operator: '/',
+                right: {
+                  type: Symbol.for('NUMBER'),
+                  value: 4
+                },
+                type: Symbol.for('BINARY')
+              },
+              type: Symbol.for('BINARY')
+            },
+            type: Symbol.for('ASSIGN')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });
