@@ -133,6 +133,27 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse assignments', () => {
+
+      expect(createStream('a = 1').parse()).to.equal({
+        program: [
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'a'
+            },
+            right: {
+              type: Symbol.for('NUMBER'),
+              value: 1
+            },
+            type: Symbol.for('ASSIGN')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });
