@@ -65,6 +65,18 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse floating numbers', () => {
+
+      expect(createStream('123.12').parse()).to.equal({
+        program: [{
+          type: Symbol.for('NUMBER'),
+          value: 123.12
+        }],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });
