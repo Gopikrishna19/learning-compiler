@@ -1,18 +1,12 @@
 const {isOneOf} = require('./utils/is');
 
-const ARITHMETIC = new Set([
+const ADDITIVES = new Set([
   '+',
-  '-',
-  '*',
-  '/',
-  '%',
-  '='
+  '-'
 ]);
 
-const LOGICAL = new Set([
-  '&',
-  '|',
-  '!'
+const ASSIGNMENTS = new Set([
+  '='
 ]);
 
 const COMPARISION = new Set([
@@ -24,8 +18,22 @@ const COMPARISION = new Set([
   '!='
 ]);
 
+const MULTIPLICATIVES = new Set([
+  '*',
+  '/',
+  '%'
+]);
+
+const LOGICAL = new Set([
+  '&',
+  '|',
+  '!'
+]);
+
 const OPERATORS = new Set([
-  ...ARITHMETIC,
+  ...MULTIPLICATIVES,
+  ...ADDITIVES,
+  ...ASSIGNMENTS,
   ...LOGICAL,
   ...COMPARISION
 ]);
@@ -52,6 +60,11 @@ const readOperator = input => {
 };
 
 module.exports = {
+  ADDITIVES,
+  ASSIGNMENTS,
+  COMPARISION,
+  LOGICAL,
+  MULTIPLICATIVES,
   isOperator,
   readOperator
 };

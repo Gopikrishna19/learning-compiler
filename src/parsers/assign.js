@@ -1,12 +1,12 @@
+const {ASSIGNMENTS} = require('../tokenizers/operators');
 const {expect} = require('./expect');
-const {readUnit} = require('./unit.js');
+const {readBinary} = require('./binary.js');
 
 const ASSIGN = Symbol.for('ASSIGN');
-const ASSIGNMENTS = new Set(['=']);
 
 const readAssign = tokens => {
 
-  const left = readUnit(tokens);
+  const left = readBinary(tokens);
 
   if (expect(tokens, ASSIGNMENTS)) {
 
