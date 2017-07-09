@@ -22,6 +22,7 @@ const readSymbol = input => ({
 });
 
 module.exports = {
+  SYMBOL,
   isSymbol,
   readSymbol
 };

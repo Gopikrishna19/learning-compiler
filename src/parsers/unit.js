@@ -1,5 +1,6 @@
 const {isBoolean, parseBoolean} = require('./booleans');
 const {isIf, parseIf} = require('./if');
+const {isSemi, readSemi} = require('./semi');
 const {IDENTIFIER} = require('../tokenizers/identifiers');
 const {NUMBER} = require('../tokenizers/numbers');
 const {STRING} = require('../tokenizers/strings');
@@ -20,6 +21,10 @@ const readUnit = tokens => {
   } else if (token.type === NUMBER || token.type === STRING || token.type === IDENTIFIER) {
 
     return tokens.next();
+
+  } else if (isSemi(token)) {
+
+    return readSemi(tokens);
 
   }
 

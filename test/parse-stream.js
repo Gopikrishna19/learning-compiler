@@ -357,6 +357,41 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse multiple statements', () => {
+
+      expect(createStream(`
+        a = 1;
+        b = 2;
+      `).parse()).to.equal({
+        program: [
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'a'
+            },
+            right: {
+              type: Symbol.for('NUMBER'),
+              value: 1
+            },
+            type: Symbol.for('ASSIGN')
+          },
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'b'
+            },
+            right: {
+              type: Symbol.for('NUMBER'),
+              value: 2
+            },
+            type: Symbol.for('ASSIGN')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });

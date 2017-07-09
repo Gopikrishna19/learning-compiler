@@ -13,7 +13,7 @@ const readProgram = tokens => {
   }
 
   return {
-    program,
+    program: program.filter(valid => valid),
     type: PROGRAM
   };
 
