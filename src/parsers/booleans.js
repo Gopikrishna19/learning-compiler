@@ -1,13 +1,9 @@
-const {KEYWORD} = require('../tokenizers/identifiers');
+const {BOOLEANS} = require('../tokenizers/identifiers');
+const {isKeyword} = require('./keyword');
 
 const BOOLEAN = Symbol.for('BOOLEAN');
 
-const isBooleanString = value => [
-  'true',
-  'false'
-].indexOf(value) >= 0;
-
-const isBoolean = token => token.type === KEYWORD && isBooleanString(token.value);
+const isBoolean = token => isKeyword(token, BOOLEANS);
 
 const parseBoolean = token => ({
   type: BOOLEAN,
