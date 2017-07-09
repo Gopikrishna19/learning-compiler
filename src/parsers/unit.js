@@ -1,3 +1,4 @@
+const {isBlock, readBlock} = require('./block');
 const {isBoolean, parseBoolean} = require('./booleans');
 const {isIf, parseIf} = require('./if');
 const {isSemi, readSemi} = require('./semi');
@@ -10,7 +11,11 @@ const readUnit = tokens => {
 
   const token = tokens.peek();
 
-  if (isIf(token)) {
+  if (isBlock(token, new Set(['']))) {
+
+    return readBlock(tokens);
+
+  } else if (isIf(token)) {
 
     return parseIf(tokens);
 

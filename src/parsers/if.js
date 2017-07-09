@@ -1,5 +1,6 @@
 const {consume} = require('./utils/consume');
 const {isKeyword} = require('./utils/is');
+const {isBlock} = require('./block');
 
 const CONDITION = Symbol.for('CONDITION');
 
@@ -9,7 +10,6 @@ const THEN = new Set(['then']);
 
 const isIf = token => isKeyword(token, IF);
 const isElse = token => isKeyword(token, ELSE);
-const isThen = token => isKeyword(token, THEN);
 
 const parseIf = tokens => {
 
@@ -19,7 +19,7 @@ const parseIf = tokens => {
 
   const condition = readBinary(tokens);
 
-  if (isThen(tokens.peek())) {
+  if (!isBlock(tokens.peek())) {
 
     consume(tokens, THEN);
 

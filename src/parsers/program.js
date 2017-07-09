@@ -20,5 +20,6 @@ const readProgram = tokens => {
 };
 
 module.exports = {
+  PROGRAM,
   readProgram
 };

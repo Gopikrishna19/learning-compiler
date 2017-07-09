@@ -53,6 +53,12 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should fail on missing keyword', () => {
+
+      expect(() => createStream('if a == 1 b').parse()).to.throw(Error, 'Expected token: ["then"] (1:11)');
+
+    });
+
     it('should parse integers', () => {
 
       expect(createStream('123').parse()).to.equal({
@@ -348,6 +354,99 @@ describe('Parse Stream', () => {
             thenPart: {
               type: Symbol.for('IDENTIFIER'),
               value: 'b'
+            },
+            type: Symbol.for('CONDITION')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
+    it('should parse complex if-then-else statements', () => {
+
+      expect(createStream(`
+        if a == 1 {
+          b = 2;
+        }
+      `).parse()).to.equal({
+        program: [
+          {
+            condition: {
+              left: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'a'
+              },
+              operator: '==',
+              right: {
+                type: Symbol.for('NUMBER'),
+                value: 1
+              },
+              type: Symbol.for('BINARY')
+            },
+            thenPart: {
+              left: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'b'
+              },
+              right: {
+                type: Symbol.for('NUMBER'),
+                value: 2
+              },
+              type: Symbol.for('ASSIGN')
+            },
+            type: Symbol.for('CONDITION')
+          }
+        ],
+        type: PROGRAM
+      });
+
+      expect(createStream(`
+        if a == 1 {
+          b = 2
+          c = 3;
+        }
+      `).parse()).to.equal({
+        program: [
+          {
+            condition: {
+              left: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'a'
+              },
+              operator: '==',
+              right: {
+                type: Symbol.for('NUMBER'),
+                value: 1
+              },
+              type: Symbol.for('BINARY')
+            },
+            thenPart: {
+              program: [
+                {
+                  left: {
+                    type: Symbol.for('IDENTIFIER'),
+                    value: 'b'
+                  },
+                  right: {
+                    type: Symbol.for('NUMBER'),
+                    value: 2
+                  },
+                  type: Symbol.for('ASSIGN')
+                },
+                {
+                  left: {
+                    type: Symbol.for('IDENTIFIER'),
+                    value: 'c'
+                  },
+                  right: {
+                    type: Symbol.for('NUMBER'),
+                    value: 3
+                  },
+                  type: Symbol.for('ASSIGN')
+                }
+              ],
+              type: PROGRAM
             },
             type: Symbol.for('CONDITION')
           }
