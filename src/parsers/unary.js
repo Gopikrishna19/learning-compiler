@@ -1,5 +1,5 @@
 const {ADDITIVES, NEGATION} = require('../tokenizers/operators');
-const {expect} = require('./expect');
+const {expect} = require('./utils/expect');
 const {readUnit} = require('./unit.js');
 
 const UNARY = Symbol.for('UNARY');

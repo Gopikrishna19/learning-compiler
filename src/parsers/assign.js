@@ -1,5 +1,5 @@
 const {ASSIGNMENTS} = require('../tokenizers/operators');
-const {expect} = require('./expect');
+const {expect} = require('./utils/expect');
 const {readBinary} = require('./binary.js');
 
 const ASSIGN = Symbol.for('ASSIGN');

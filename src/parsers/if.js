@@ -1,5 +1,5 @@
-const {consume} = require('./consume');
-const {isKeyword} = require('./keyword');
+const {consume} = require('./utils/consume');
+const {isKeyword} = require('./utils/is');
 
 const CONDITION = Symbol.for('CONDITION');
 

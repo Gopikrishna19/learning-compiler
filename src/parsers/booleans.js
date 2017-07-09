@@ -1,5 +1,5 @@
 const {BOOLEANS} = require('../tokenizers/identifiers');
-const {isKeyword} = require('./keyword');
+const {isKeyword} = require('./utils/is');
 
 const BOOLEAN = Symbol.for('BOOLEAN');
 

@@ -1,5 +1,5 @@
 const operators = require('../tokenizers/operators');
-const {expect} = require('./expect');
+const {expect} = require('./utils/expect');
 const {readUnary} = require('./unary.js');
 
 const BINARY = Symbol.for('BINARY');

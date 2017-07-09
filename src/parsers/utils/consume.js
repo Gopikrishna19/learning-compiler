@@ -1,4 +1,4 @@
-const {ExpectedTokenError} = require('./errors/expected-token');
+const {ExpectedTokenError} = require('../errors/expected-token');
 const {expect} = require('./expect');
 
 const consume = (tokens, values) => {
