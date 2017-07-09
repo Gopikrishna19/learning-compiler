@@ -1,4 +1,5 @@
 const {isBoolean, parseBoolean} = require('./booleans');
+const {isIf, parseIf} = require('./if');
 const {IDENTIFIER} = require('../tokenizers/identifiers');
 const {NUMBER} = require('../tokenizers/numbers');
 const {STRING} = require('../tokenizers/strings');
@@ -8,7 +9,11 @@ const readUnit = tokens => {
 
   const token = tokens.peek();
 
-  if (isBoolean(token)) {
+  if (isIf(token)) {
+
+    return parseIf(tokens);
+
+  } else if (isBoolean(token)) {
 
     return parseBoolean(tokens.next());
 

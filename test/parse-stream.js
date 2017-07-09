@@ -295,6 +295,68 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse simple if-then-else statements', () => {
+
+      expect(createStream('if a == 1 then b else c').parse()).to.equal({
+        program: [
+          {
+            condition: {
+              left: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'a'
+              },
+              operator: '==',
+              right: {
+                type: Symbol.for('NUMBER'),
+                value: 1
+              },
+              type: Symbol.for('BINARY')
+            },
+            elsePart: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'c'
+            },
+            thenPart: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'b'
+            },
+            type: Symbol.for('CONDITION')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
+    it('should parse simple if-then statements', () => {
+
+      expect(createStream('if a == 1 then b').parse()).to.equal({
+        program: [
+          {
+            condition: {
+              left: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'a'
+              },
+              operator: '==',
+              right: {
+                type: Symbol.for('NUMBER'),
+                value: 1
+              },
+              type: Symbol.for('BINARY')
+            },
+            thenPart: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'b'
+            },
+            type: Symbol.for('CONDITION')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });

@@ -1,12 +1,16 @@
 const {readWhile} = require('./utils/while');
 
+const BOOLEANS = new Set([
+  'true',
+  'false'
+]);
+
 const KEYWORDS = new Set([
   'if',
   'then',
   'else',
   'lambda',
-  'true',
-  'false'
+  ...BOOLEANS
 ]);
 
 const IDENTIFIER = Symbol.for('IDENTIFIER');
@@ -27,6 +31,7 @@ const readIdentifier = input => {
 };
 
 module.exports = {
+  BOOLEANS,
   IDENTIFIER,
   KEYWORD,
   isIdentifier,
