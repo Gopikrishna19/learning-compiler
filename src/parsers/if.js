@@ -45,5 +45,7 @@ const parseIf = tokens => {
 
 };
 
-module.exports.isIf = isIf;
-module.exports.parseIf = parseIf;
+module.exports = {
+  isIf,
+  parseIf
+};
