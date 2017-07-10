@@ -7,6 +7,7 @@ describe('Parse Stream', () => {
 
   const PROGRAM = Symbol.for('PROGRAM');
   const createStream = input => new ParseStream(new TokenStream(new InputStream(input)));
+  const parse = input => createStream(input).parse();
 
   describe('initialization', () => {
 
@@ -40,7 +41,7 @@ describe('Parse Stream', () => {
 
     it('should return empty program if end of stream', () => {
 
-      expect(createStream('').parse()).to.equal({
+      expect(parse('')).to.equal({
         program: [],
         type: PROGRAM
       });
@@ -49,19 +50,19 @@ describe('Parse Stream', () => {
 
     it('should fail on unexpected token', () => {
 
-      expect(() => createStream('=').parse()).to.throw(Error, 'Unexpected token: {"value":"="} (1:1)');
+      expect(() => parse('=')).to.throw(Error, 'Unexpected token: {"value":"="} (1:1)');
 
     });
 
     it('should fail on missing keyword', () => {
 
-      expect(() => createStream('if a == 1 b').parse()).to.throw(Error, 'Expected token: ["then"] (1:11)');
+      expect(() => parse('if a == 1 b')).to.throw(Error, 'Expected token: ["then"] (1:11)');
 
     });
 
     it('should parse integers', () => {
 
-      expect(createStream('123').parse()).to.equal({
+      expect(parse('123')).to.equal({
         program: [
           {
             type: Symbol.for('NUMBER'),
@@ -75,7 +76,7 @@ describe('Parse Stream', () => {
 
     it('should parse floating numbers', () => {
 
-      expect(createStream('123.12').parse()).to.equal({
+      expect(parse('123.12')).to.equal({
         program: [
           {
             type: Symbol.for('NUMBER'),
@@ -89,7 +90,7 @@ describe('Parse Stream', () => {
 
     it('should parse strings', () => {
 
-      expect(createStream('"test"').parse()).to.equal({
+      expect(parse('"test"')).to.equal({
         program: [
           {
             type: Symbol.for('STRING'),
@@ -103,7 +104,7 @@ describe('Parse Stream', () => {
 
     it('should parse identifiers', () => {
 
-      expect(createStream('a').parse()).to.equal({
+      expect(parse('a')).to.equal({
         program: [
           {
             type: Symbol.for('IDENTIFIER'),
@@ -117,7 +118,7 @@ describe('Parse Stream', () => {
 
     it('should parse booleans', () => {
 
-      expect(createStream('true').parse()).to.equal({
+      expect(parse('true')).to.equal({
         program: [
           {
             type: Symbol.for('BOOLEAN'),
@@ -127,7 +128,7 @@ describe('Parse Stream', () => {
         type: PROGRAM
       });
 
-      expect(createStream('false').parse()).to.equal({
+      expect(parse('false')).to.equal({
         program: [
           {
             type: Symbol.for('BOOLEAN'),
@@ -141,7 +142,7 @@ describe('Parse Stream', () => {
 
     it('should parse assignments', () => {
 
-      expect(createStream('a = 1').parse()).to.equal({
+      expect(parse('a = 1')).to.equal({
         program: [
           {
             left: {
@@ -162,7 +163,7 @@ describe('Parse Stream', () => {
 
     it('should parse binary expressions', () => {
 
-      expect(createStream('a = 1 * 2').parse()).to.equal({
+      expect(parse('a = 1 * 2')).to.equal({
         program: [
           {
             left: {
@@ -191,7 +192,7 @@ describe('Parse Stream', () => {
 
     it('should parse complex binary expressions', () => {
 
-      expect(createStream('a = 1 + 2 - 3').parse()).to.equal({
+      expect(parse('a = 1 + 2 - 3')).to.equal({
         program: [
           {
             left: {
@@ -228,7 +229,7 @@ describe('Parse Stream', () => {
 
     it('should parse binary expressions with precedence', () => {
 
-      expect(createStream('a = 1 % 2 - 3 / 4').parse()).to.equal({
+      expect(parse('a = 1 % 2 - 3 / 4')).to.equal({
         program: [
           {
             left: {
@@ -273,7 +274,7 @@ describe('Parse Stream', () => {
 
     it('should parse unary expressions', () => {
 
-      expect(createStream('-a & !b').parse()).to.equal({
+      expect(parse('-a & !b')).to.equal({
         program: [
           {
             left: {
@@ -303,7 +304,7 @@ describe('Parse Stream', () => {
 
     it('should parse simple if-then-else statements', () => {
 
-      expect(createStream('if a == 1 then b else c').parse()).to.equal({
+      expect(parse('if a == 1 then b else c')).to.equal({
         program: [
           {
             condition: {
@@ -336,7 +337,7 @@ describe('Parse Stream', () => {
 
     it('should parse simple if-then statements', () => {
 
-      expect(createStream('if a == 1 then b').parse()).to.equal({
+      expect(parse('if a == 1 then b')).to.equal({
         program: [
           {
             condition: {
@@ -365,11 +366,11 @@ describe('Parse Stream', () => {
 
     it('should parse complex if-then-else statements', () => {
 
-      expect(createStream(`
+      expect(parse(`
         if a == 1 {
           b = 2;
         }
-      `).parse()).to.equal({
+      `)).to.equal({
         program: [
           {
             condition: {
@@ -401,12 +402,12 @@ describe('Parse Stream', () => {
         type: PROGRAM
       });
 
-      expect(createStream(`
+      expect(parse(`
         if a == 1 {
           b = 2
           c = 3;
         }
-      `).parse()).to.equal({
+      `)).to.equal({
         program: [
           {
             condition: {
@@ -458,10 +459,10 @@ describe('Parse Stream', () => {
 
     it('should parse multiple statements', () => {
 
-      expect(createStream(`
+      expect(parse(`
         a = 1;
         b = 2;
-      `).parse()).to.equal({
+      `)).to.equal({
         program: [
           {
             left: {
@@ -493,14 +494,14 @@ describe('Parse Stream', () => {
 
     it('should parse lambda expressions', () => {
 
-      expect(createStream(`
+      expect(parse(`
         f1 = lambda (a) a * a
         f2 = lambda (a, b) {
           a = 1
           b = 2
         }
         f3 = lambda () a
-      `).parse()).to.equal({
+      `)).to.equal({
         program: [
           {
             left: {
