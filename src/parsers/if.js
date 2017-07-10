@@ -11,7 +11,7 @@ const THEN = new Set(['then']);
 const isIf = token => isKeyword(token, IF);
 const isElse = token => isKeyword(token, ELSE);
 
-const parseIf = tokens => {
+const readIf = tokens => {
 
   const {readBinary} = require('./binary');
 
@@ -47,5 +47,5 @@ const parseIf = tokens => {
 
 module.exports = {
   isIf,
-  parseIf
+  readIf
 };

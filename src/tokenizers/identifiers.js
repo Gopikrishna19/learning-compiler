@@ -5,12 +5,16 @@ const BOOLEANS = new Set([
   'false'
 ]);
 
+const LAMBDA = new Set([
+  'lambda'
+]);
+
 const KEYWORDS = new Set([
   'if',
   'then',
   'else',
-  'lambda',
-  ...BOOLEANS
+  ...BOOLEANS,
+  ...LAMBDA
 ]);
 
 const IDENTIFIER = Symbol.for('IDENTIFIER');
@@ -34,6 +38,7 @@ module.exports = {
   BOOLEANS,
   IDENTIFIER,
   KEYWORD,
+  LAMBDA,
   isIdentifier,
   readIdentifier
 };

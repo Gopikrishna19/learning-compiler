@@ -5,12 +5,12 @@ const BOOLEAN = Symbol.for('BOOLEAN');
 
 const isBoolean = token => isKeyword(token, BOOLEANS);
 
-const parseBoolean = token => ({
+const readBoolean = token => ({
   type: BOOLEAN,
   value: token.value === 'true'
 });
 
 module.exports = {
   isBoolean,
-  parseBoolean
+  readBoolean
 };

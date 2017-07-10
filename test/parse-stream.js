@@ -491,6 +491,99 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse lambda expressions', () => {
+
+      expect(createStream(`
+        f1 = lambda (a) a * a
+        f2 = lambda (a, b) {
+          a = 1
+          b = 2
+        }
+        f3 = lambda () a
+      `).parse()).to.equal({
+        program: [
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'f1'
+            },
+            right: {
+              body: {
+                left: {
+                  type: Symbol.for('IDENTIFIER'),
+                  value: 'a'
+                },
+                operator: '*',
+                right: {
+                  type: Symbol.for('IDENTIFIER'),
+                  value: 'a'
+                },
+                type: Symbol.for('BINARY')
+              },
+              parameters: ['a'],
+              type: Symbol.for('LAMBDA')
+            },
+            type: Symbol.for('ASSIGN')
+          },
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'f2'
+            },
+            right: {
+              body: {
+                program: [
+                  {
+                    left: {
+                      type: Symbol.for('IDENTIFIER'),
+                      value: 'a'
+                    },
+                    right: {
+                      type: Symbol.for('NUMBER'),
+                      value: 1
+                    },
+                    type: Symbol.for('ASSIGN')
+                  },
+                  {
+                    left: {
+                      type: Symbol.for('IDENTIFIER'),
+                      value: 'b'
+                    },
+                    right: {
+                      type: Symbol.for('NUMBER'),
+                      value: 2
+                    },
+                    type: Symbol.for('ASSIGN')
+                  }
+                ],
+                type: PROGRAM
+              },
+              parameters: ['a', 'b'],
+              type: Symbol.for('LAMBDA')
+            },
+            type: Symbol.for('ASSIGN')
+          },
+          {
+            left: {
+              type: Symbol.for('IDENTIFIER'),
+              value: 'f3'
+            },
+            right: {
+              body: {
+                type: Symbol.for('IDENTIFIER'),
+                value: 'a'
+              },
+              parameters: [],
+              type: Symbol.for('LAMBDA')
+            },
+            type: Symbol.for('ASSIGN')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });

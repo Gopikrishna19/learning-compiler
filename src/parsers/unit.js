@@ -1,6 +1,7 @@
 const {isBlock, readBlock} = require('./block');
-const {isBoolean, parseBoolean} = require('./booleans');
-const {isIf, parseIf} = require('./if');
+const {isBoolean, readBoolean} = require('./booleans');
+const {isIf, readIf} = require('./if');
+const {isLambda, readLambda} = require('./lambda');
 const {isSemi, readSemi} = require('./semi');
 const {IDENTIFIER} = require('../tokenizers/identifiers');
 const {NUMBER} = require('../tokenizers/numbers');
@@ -17,11 +18,15 @@ const readUnit = tokens => {
 
   } else if (isIf(token)) {
 
-    return parseIf(tokens);
+    return readIf(tokens);
 
   } else if (isBoolean(token)) {
 
-    return parseBoolean(tokens.next());
+    return readBoolean(tokens.next());
+
+  } else if (isLambda(token)) {
+
+    return readLambda(tokens);
 
   } else if (token.type === NUMBER || token.type === STRING || token.type === IDENTIFIER) {
 
