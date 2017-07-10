@@ -10,7 +10,7 @@ const isBlock = token => isSymbol(token, BLOCK_OPEN);
 const readBlock = tokens => {
 
   const {PROGRAM} = require('./program');
-  const {readAssign} = require('./assign');
+  const {readCall} = require('./call');
 
   let program = [];
 
@@ -18,7 +18,7 @@ const readBlock = tokens => {
 
   do {
 
-    program.push(readAssign(tokens));
+    program.push(readCall(tokens));
 
   } while (!tokens.EOF && !expect(tokens, BLOCK_CLOSE));
 

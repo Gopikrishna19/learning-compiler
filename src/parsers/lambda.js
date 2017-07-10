@@ -15,7 +15,7 @@ const isLambda = token => isKeyword(token, keywords.LAMBDA);
 const readLambda = tokens => {
 
   const {isBlock, readBlock} = require('./block');
-  const {readAssign} = require('./assign');
+  const {readCall} = require('./call');
 
   consume(tokens, keywords.LAMBDA);
   consume(tokens, PAREN_OPEN);
@@ -38,7 +38,7 @@ const readLambda = tokens => {
 
   }
 
-  const body = isBlock(tokens.peek()) ? readBlock(tokens) : readAssign(tokens);
+  const body = isBlock(tokens.peek()) ? readBlock(tokens) : readCall(tokens);
 
   return {
     body,
@@ -49,6 +49,9 @@ const readLambda = tokens => {
 };
 
 module.exports = {
+  COMMA,
+  PAREN_CLOSE,
+  PAREN_OPEN,
   isLambda,
   readLambda
 };

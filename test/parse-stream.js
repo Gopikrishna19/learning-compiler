@@ -585,6 +585,45 @@ describe('Parse Stream', () => {
 
     });
 
+    it('should parse function calls', () => {
+
+      expect(parse(`
+        f1(a = 1, 2)
+        f2()
+      `)).to.equal({
+        program: [
+          {
+            arguments: [
+              {
+                left: {
+                  type: Symbol.for('IDENTIFIER'),
+                  value: 'a'
+                },
+                right: {
+                  type: Symbol.for('NUMBER'),
+                  value: 1
+                },
+                type: Symbol.for('ASSIGN')
+              },
+              {
+                type: Symbol.for('NUMBER'),
+                value: 2
+              }
+            ],
+            name: 'f1',
+            type: Symbol.for('CALL')
+          },
+          {
+            arguments: [],
+            name: 'f2',
+            type: Symbol.for('CALL')
+          }
+        ],
+        type: PROGRAM
+      });
+
+    });
+
   });
 
 });

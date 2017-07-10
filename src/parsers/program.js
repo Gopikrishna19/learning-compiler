@@ -1,4 +1,4 @@
-const {readAssign} = require('./assign');
+const {readCall} = require('./call');
 
 const PROGRAM = Symbol.for('PROGRAM');
 
@@ -8,7 +8,7 @@ const readProgram = tokens => {
 
   while (!tokens.EOF) {
 
-    program.push(readAssign(tokens));
+    program.push(readCall(tokens));
 
   }
 

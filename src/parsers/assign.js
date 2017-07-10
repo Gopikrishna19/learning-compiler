@@ -6,13 +6,14 @@ const ASSIGN = Symbol.for('ASSIGN');
 
 const readAssign = tokens => {
 
+  const {readCall} = require('./call');
   const left = readBinary(tokens);
 
   if (expect(tokens, ASSIGNMENTS)) {
 
     return {
       left,
-      right: readAssign(tokens),
+      right: readCall(tokens),
       type: ASSIGN
     };
 
