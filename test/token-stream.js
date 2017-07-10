@@ -220,7 +220,7 @@ describe('Token Stream', () => {
         
         println(fib(15));
         
-        print-range = λ(a, b)             
+        print-range = lambda (a, b)             
                         if a <= b then {  # "then" here is optional as you can see below
                           print(a);
                           if a + 1 <= b {
